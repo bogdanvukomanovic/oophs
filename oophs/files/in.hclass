@@ -1,0 +1,45 @@
+class Student [] [] p:studenti
+ime String @get @set @notNull
+prezime String @get @set @notNull
+ocene int * @get @set @add
+indeksi @OneToMany StudIndeks @owner @get @add 
+constructor @NoArgsConstructor @RequiredArgsConstructor
+
+class StudIndeks [] [] p:studenti
+broj int @get @set @notNull
+godinaUpisa int @get @set @notNull
+aktivan boolean @get @set
+studProgram @ManyToOne StudProgram @owner @get @set 
+student @ManyToOne Student @get @set 
+polozeniPredmeti @ManyToMany Predmet @owner @get @set @add 
+constructor @NoArgsConstructor  @RequiredArgsConstructor
+
+class StudProgram [] [] p:studenti
+naziv String @get @set @notNull
+godinaAkreditacije int @get @set
+predmeti @OneToMany Predmet @owner @get @add
+indeksi @OneToMany StudIndeks @get @add
+constructor @NoArgsConstructor  @AllArgsConstructor
+
+class Predmet [] [] p:studenti
+naziv String @get @set @notNull
+espb int @get @set @notNull
+polozili @ManyToMany StudIndeks @get @set @add
+studProgram @ManyToOne StudProgram @set @get
+constructor @NoArgsConstructor @AllArgsConstructor
+
+class Dog [Animal Being] [] p:animal
+nickname String @get @set @notNull
+age int @get @set @notNull
+constructor @NoArgsConstructor @AllArgsConstructor @RequiredArgsConstructor
+
+interface Animal p:animal
+@animalSound:public:void
+@run:public:void
+
+interface Being p:animal
+@exist:public:void
+
+abstract Animal p:animal
+@sleep:public:abstract:void
+@animalSound:public:void
